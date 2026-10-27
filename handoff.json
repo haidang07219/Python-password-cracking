@@ -1,0 +1,24 @@
+{
+  "target_profile": {
+    "fname": "Dang",
+    "surname": "Hai",
+    "lname": "Nhu",
+    "nickname": "Bob",
+    "bday": "21",
+    "bmonth": "09",
+    "byear": "2007",
+    "sex": "male",
+    "petname": "Ben",
+    "favourite_food": "pizza",
+    "favourite_color": "blue",
+    "phone_number": "0123456789"
+  },
+  "password_1_hash": {
+    "modulo_hash": 552,
+    "sha256_hash": "06cb157a11c9e55d8df2847158126c2982cd7eae897e781cc0be3cb7764ed58a"
+  },
+  "password_2_hash": {
+    "modulo_hash": 219,
+    "sha256_hash": "84983e318775b1ff281eaaaf40d6d91d4b08b0eb335d2008a6ceaf4f9d4991f9"
+  }
+}
