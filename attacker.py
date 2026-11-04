@@ -4,15 +4,19 @@ import os
 import time
 from hash_utils import modulo_hash, sha256_hash
 
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 HANDOFF_FILE = os.path.join(BASE_DIR, "handoff.json")
 
-MAX_ATTEMPTS = 2_000_000
-PROGRESS_EVERY = 200
+MAX_ATTEMPTS = 5_000_000       
+PROGRESS_EVERY = 20_000      
+
 COMMON_SPECIALS = ["@", "!", "#", "$", "_", "-", ""]
 
 
 WIDTH = 72
+
+
 def print_banner(title: str) -> None:
     print("=" * WIDTH)
     print(title.center(WIDTH))
@@ -42,19 +46,50 @@ def leet_variants(word: str) -> set:
     return result
 
 
+MAX_FULLNAME_WORDS = 5 
+
 def password_building(profile: dict) -> list:
     name_tokens = set()
     for key in ("fname", "surname", "lname", "nickname", "petname", "favourite_food", "favourite_color"):
         value = profile.get(key, "")
         if value:
             name_tokens |= leet_variants(value)
-    number_token = [
-        profile.get("byear", ""),
-        profile.get("bday", ""),
-        profile.get("bmonth", ""),
-        profile.get("phone_number", "")
-    ]
-    number_token = [t for t in number_token if t]  # loại bỏ rỗng
+
+   
+ 
+    fullname = profile.get("fullname", "")
+    if fullname:
+        words = fullname.split()[:MAX_FULLNAME_WORDS]
+        for word_order in itertools.permutations(words):
+            n = len(word_order)
+            for i, j in itertools.combinations(range(n + 1), 2):
+                joined = "".join(word_order[i:j])
+                if joined:
+                    name_tokens |= leet_variants(joined)
+
+    
+    date_fields = []
+    byear = profile.get("byear", "")
+    bday = profile.get("bday", "")
+    bmonth = profile.get("bmonth", "")
+    if byear:
+        date_fields.append(byear)
+        if len(byear) >= 2:
+            date_fields.append(byear[-2:])          
+    if bday:
+        date_fields.append(bday)
+    if bmonth:
+        date_fields.append(bmonth)
+
+    number_token = [profile.get("phone_number", "")] + list(date_fields)
+    for r in range(2, len(date_fields) + 1):
+        for combo in itertools.permutations(date_fields, r):
+            number_token.append("".join(combo))
+
+    number_token = [t for t in number_token if t]       
+    number_token = list(dict.fromkeys(number_token))    
+
+    number_token.append("")
 
     specials = list(dict.fromkeys(COMMON_SPECIALS))
 
