@@ -4,11 +4,9 @@ import secrets
 import string
 from hash_utils import hash_val
 
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROFILE_FILE = os.path.join(BASE_DIR, "user_profile.txt")
 HANDOFF_FILE = os.path.join(BASE_DIR, "handoff.json")
-
 
 # scan user profile
 def load_profile(path: str = PROFILE_FILE) -> dict:
@@ -20,7 +18,6 @@ def load_profile(path: str = PROFILE_FILE) -> dict:
             profile[key.strip()] = value.strip()
     return profile
 
-
 # word leet
 def leetspeak(word: str) -> str:
     subs = {"a": "4", "e": "3", "o": "0", "s": "5", "i": "1", "g": "9", "b": "6"}
@@ -28,14 +25,14 @@ def leetspeak(word: str) -> str:
         word = word.replace(plain, repl)
     return word
 
-
 # user profile password
 def generate_user_profile_password(profile: dict) -> str:
     SPECIAL_CHAR = "@"
     base = profile.get("fname", "") or profile.get("nickname", "")
     leet = leetspeak(base)
     year = profile.get("byear", "")
-    phonenumber = profile.get("phone_number", "")
+
+    #return "NhuH4iDag@21092007)"   
     return f"{leet}{SPECIAL_CHAR}{year}"
 
 
@@ -43,11 +40,7 @@ def generate_random_password_using_secrets(length) -> str:
     alphabet = string.ascii_letters + string.digits + "!@#$%^&*()_-=+"
     return "".join(secrets.choice(alphabet) for _ in range(length))
 
-
-
 WIDTH = 72
-
-
 def print_banner(title: str) -> None:
     print("=" * WIDTH)
     print(title.center(WIDTH))
