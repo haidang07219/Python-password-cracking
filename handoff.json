@@ -11,14 +11,15 @@
     "petname": "Ben",
     "favourite_food": "pizza",
     "favourite_color": "blue",
-    "phone_number": "0123456789"
+    "phone_number": "0123456789",
+    "fullname": "Nhu Hai Dang"
   },
   "password_1_hash": {
     "modulo_hash": 552,
     "sha256_hash": "06cb157a11c9e55d8df2847158126c2982cd7eae897e781cc0be3cb7764ed58a"
   },
   "password_2_hash": {
-    "modulo_hash": 219,
-    "sha256_hash": "84983e318775b1ff281eaaaf40d6d91d4b08b0eb335d2008a6ceaf4f9d4991f9"
+    "modulo_hash": 209,
+    "sha256_hash": "09cdd3c926f3db22bbb7be9fc642fae0022f6b511b047895def589621fcb7ebb"
   }
 }
